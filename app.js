@@ -1,15 +1,31 @@
 import express from 'express'
 import dotenv from 'dotenv'
+import cookieParser from 'cookie-parser'
+import {checkUser} from './middlewares/authMiddleware.js'
+import userRoute from "./routes/userRoute.js"
+import productRoute from "./routes/productRoute.js"
+import mongoose from "mongoose"
+mongoose.set('strictQuery', false)
+
 
 dotenv.config()
-
-const app = express()
+//conn()
 const port = process.env.PORT
-app.use('/', (req, res) => {
-    res.json({
-        "message": "server started"
-    })
-})
+const app = express()
+mongoose.connect('mongodb://localhost/mayzor-testCase-db')
+
+app.use(express.json())
+app.use(express.urlencoded({extended:true}))
+app.use(cookieParser())
+
+
+
+
+app.get('*',checkUser)
+app.use('/users',userRoute)
+app.use('/products',productRoute)
+
+
 
 app.listen(port, () => {
     console.log(`app started at port ${port}`)

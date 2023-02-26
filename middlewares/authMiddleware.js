@@ -1,5 +1,31 @@
-import User from '../models/User.js'
 import jwt from 'jsonwebtoken'
+import User from "../models/User.js";
+
+global.user = null
+const checkUser = async (req, res, next) => {
+    const token = req.cookies.jwt
+    if(token){
+        jwt.verify(token, process.env.JWT_SECRET, async (err, decodedToken) => {
+            if(err){
+                console.log(err.message)
+                res.locals.user = null
+                next()
+            }
+            else {
+                const founduser = await User.findById(decodedToken.userId)
+                console.log(user)
+                res.locals.user = user
+                user = founduser
+                next()
+            }
+        })
+    }
+    else{
+        res.locals.user = null
+        next()
+    }
+}
+
 
 const authenticateToken = async (req, res, next) => {
     try {
@@ -31,4 +57,4 @@ const authenticateToken = async (req, res, next) => {
     }
 };
 
-export { authenticateToken }
+export { authenticateToken, checkUser }
