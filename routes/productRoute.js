@@ -9,5 +9,6 @@ router.route('/').post(productController.createProduct)
 router.route('/').get(authMiddleware.authenticateToken, productController.getAllProducts)
 router.route('/addToFavorites').post(authMiddleware.authenticateToken, authMiddleware.checkUser ,productController.addToFavorites)
 router.route('/removeFromFavorites').post(authMiddleware.authenticateToken, authMiddleware.checkUser ,productController.removeFromFavorites)
+router.route('/showFavorites').get(authMiddleware.authenticateToken, authMiddleware.checkUser ,productController.showFavorites)
 
 export default router

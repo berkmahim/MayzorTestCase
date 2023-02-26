@@ -1,5 +1,5 @@
-import Product from '../models/Product.js'
 import * as authMiddleware from '../middlewares/authMiddleware.js'
+import Product from "../models/Product.js";
 
 const createProduct = async (req, res) =>{
     try {
@@ -76,7 +76,30 @@ const removeFromFavorites = async (req, res) => {
     }
 }
 
+const showFavorites = async (req, res) => {
+    try{
+        let favorites = []
+            for (let item of user.favorites) {
+            item = item.toString()
+            let product = await Product.findById(item)
+            favorites.push({
+                "name": product.name,
+                "id": product._id
+            })
+        }
+        res.status(200).send(
+            favorites
+        )
+    }catch (error){
+        res.status(400).json({
+            status: "error",
+            error
+        })
+    }
+
+}
 
 
 
-export {createProduct, getAllProducts, addToFavorites, removeFromFavorites}
+
+export {createProduct, getAllProducts, addToFavorites, removeFromFavorites, showFavorites}

@@ -14,22 +14,22 @@ const createUser = async (req, res) => {
 const loginUser = async (req, res) => {
     try{
         const {userData, password} = req.body
-        let user = await User.findOne({phnNumber: userData})
+        let userReq = await User.findOne({phnNumber: userData})
 
 
-        if (user == null){
+        if (userReq == null){
            // console.log('ife girdim')
             const user1 = await User.findOne({email: userData})
             // console.log(user)
-            user = user1
+            userReq = user1
         }
 
 
         let same = false
-        console.log(user)
-        if(user){
+        console.log(userReq)
+        if(userReq){
             // console.log("i'm in if")
-            same = await bcrypt.compare(password, user.password)
+            same = await bcrypt.compare(password, userReq.password)
             //console.log("comparing password")
             // console.log(same)
 
@@ -44,13 +44,13 @@ const loginUser = async (req, res) => {
         }
         if (same){
 
-            const token = createToken(user._id)
+            const token = createToken(userReq._id)
             res.cookie("jwt", token, {
                 httpOnly: true,
                 maxAge: 1000 * 60 * 60 * 24
             })
             res.status(200).json({
-                user,
+                userReq,
                 message: "you are logged in"
             })
         }
