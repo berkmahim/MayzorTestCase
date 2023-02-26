@@ -71,5 +71,14 @@ const createToken = (userId) => {
     })
 }
 
+const logout = (req, res) => {
+    res.cookie('jwt', '', {
+        maxAge: 1,
+    })
+    res.status(200).json({
+        "message": "you are logged out"
+    })
+}
 
-export {createUser, loginUser}
+
+export {createUser, loginUser, logout}
