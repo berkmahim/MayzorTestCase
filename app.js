@@ -6,15 +6,16 @@ import userRoute from "./routes/userRoute.js"
 import productRoute from "./routes/productRoute.js"
 import cartRoute from "./routes/cartRoute.js"
 import commentRoute from "./routes/commentRoute.js"
+import conn from "./db.js";
 import mongoose from "mongoose"
 mongoose.set('strictQuery', false)
 
 
 dotenv.config()
-//conn()
+conn()
 const port = process.env.PORT
 const app = express()
-mongoose.connect('mongodb://localhost/mayzor-testCase-db')
+//mongoose.connect('mongodb://localhost/mayzor-testCase-db')
 
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
