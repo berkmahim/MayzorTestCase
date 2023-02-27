@@ -29,6 +29,11 @@ app.use('/users',userRoute)
 app.use('/products',productRoute)
 app.use('/cart',cartRoute)
 app.use('/comment',commentRoute)
+app.use('/',(req, res)=>{
+    res.status(200).json({
+        "message":"server started"
+    })
+})
 
 
 
