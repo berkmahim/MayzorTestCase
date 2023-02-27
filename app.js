@@ -13,7 +13,7 @@ mongoose.set('strictQuery', false)
 
 dotenv.config()
 conn()
-const port = process.env.PORT
+const port = 3000
 const app = express()
 //mongoose.connect('mongodb://localhost/mayzor-testCase-db')
 
