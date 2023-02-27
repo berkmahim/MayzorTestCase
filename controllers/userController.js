@@ -15,7 +15,7 @@ const loginUser = async (req, res) => {
     try{
         const {userData, password} = req.body
         let userReq = await User.findOne({phnNumber: userData})
-
+        console.log(userReq)
 
         if (userReq == null){
            // console.log('ife girdim')
@@ -79,6 +79,7 @@ const logout = (req, res) => {
         "message": "you are logged out"
     })
 }
+
 
 
 export {createUser, loginUser, logout}

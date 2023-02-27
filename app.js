@@ -4,6 +4,8 @@ import cookieParser from 'cookie-parser'
 import {checkUser} from './middlewares/authMiddleware.js'
 import userRoute from "./routes/userRoute.js"
 import productRoute from "./routes/productRoute.js"
+import cartRoute from "./routes/cartRoute.js"
+import commentRoute from "./routes/commentRoute.js"
 import mongoose from "mongoose"
 mongoose.set('strictQuery', false)
 
@@ -24,6 +26,8 @@ app.use(cookieParser())
 app.get('*',checkUser)
 app.use('/users',userRoute)
 app.use('/products',productRoute)
+app.use('/cart',cartRoute)
+app.use('/comment',commentRoute)
 
 
 
