@@ -5,7 +5,7 @@ global.user = null
 const checkUser = async (req, res, next) => {
     const token = req.cookies.jwt
     if(token){
-        jwt.verify(token, "mayzor_jw5tto7ken_secret57key", async (err, decodedToken) => {
+        jwt.verify(token, process.env.JWT_SECRET, async (err, decodedToken) => {
             if(err){
                 console.log(err.message)
                 res.locals.user = null
@@ -32,7 +32,7 @@ const authenticateToken = async (req, res, next) => {
         const token = req.cookies.jwt
 
         if (token){
-            jwt.verify(token, "mayzor_jw5tto7ken_secret57key", (err) => {
+            jwt.verify(token, process.env.JWT_SECRET, (err) => {
                 if(err){
                     console.log(err.message)
                     res.send.json({

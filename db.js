@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
 mongoose.set('strictQuery',false)
 const conn = () =>{
-    mongoose.connect("mongodb+srv://berkmahim620:XrPm34BREZm6XHv2@cluster0.3ro9qbb.mongodb.net/?retryWrites=true&w=majority", {
+    mongoose.connect(process.env.DB_URI, {
         dbName: 'mayzor',
         useNewUrlParser: true,
         useUnifiedTopology: true,
