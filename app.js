@@ -6,15 +6,17 @@ import userRoute from "./routes/userRoute.js"
 import productRoute from "./routes/productRoute.js"
 import cartRoute from "./routes/cartRoute.js"
 import commentRoute from "./routes/commentRoute.js"
+import pageRoute from "./routes/pageRoute.js"
 import conn from "./db.js";
 import mongoose from "mongoose"
 mongoose.set('strictQuery', false)
 
 
 dotenv.config()
-conn()
+
 const port = process.env.PORT
 const app = express()
+conn()
 //mongoose.connect('mongodb://localhost/mayzor-testCase-db')
 
 app.use(express.json())
@@ -29,11 +31,8 @@ app.use('/users',userRoute)
 app.use('/products',productRoute)
 app.use('/cart',cartRoute)
 app.use('/comment',commentRoute)
-app.use('/',(req, res)=>{
-    res.status(200).json({
-        "message":"server started"
-    })
-})
+app.use('/',pageRoute)
+
 
 
 

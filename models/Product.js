@@ -4,17 +4,9 @@ import slugify from 'slugify'
 const { Schema } = mongoose;
 
 const ProductSchema = new Schema({
-        comment:{
+        name:{
             type: String,
             required: true
-        },
-        user:{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'User',
-        },
-        product:{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Product'
         },
     },
     {
